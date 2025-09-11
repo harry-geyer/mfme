@@ -3,6 +3,8 @@
 
 #include <sqlite3.h>
 
+#include "logging.h"
+
 
 int mfme_sql_fmt(sqlite3* db, int (* cb)(void* userdata, int ncol, char** coltext, char** colres), void* userdata, char** errmsg, const char* fmt, ...)
 {
@@ -26,6 +28,7 @@ int mfme_sql_fmt(sqlite3* db, int (* cb)(void* userdata, int ncol, char** coltex
         return -1;
     }
     stmt[len] = '\0';
+    mfme_logging_debug("SQL:\n%s", stmt);
     int ret = sqlite3_exec(db, stmt, cb, userdata, errmsg);
     free(stmt);
     return ret;
