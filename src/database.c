@@ -39,6 +39,12 @@ sqlite3* mfme_database_init(const char* path)
 }
 
 
+void mfme_database_deinit(sqlite3* db)
+{
+    sqlite3_close(db);
+}
+
+
 static int _mfme_database_get_time(char* buf, unsigned size)
 {
     struct timespec ts;

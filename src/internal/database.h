@@ -4,4 +4,5 @@
 
 
 sqlite3* mfme_database_init(const char* path);
+void mfme_database_close(sqlite3* db);
 

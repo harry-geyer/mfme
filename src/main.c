@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 #include <mongoose.h>
-#include <sqlite3.h>
 
 #include "database.h"
 
@@ -27,7 +26,7 @@ int main(void)
         mg_mgr_poll(&mgr, 50);
     }
     mg_mgr_free(&mgr);
-    sqlite3_close(db);
+    mfme_database_close(db);
     return 0;
 }
 
