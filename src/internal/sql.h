@@ -30,12 +30,12 @@
     "UPDATE mfme_meta SET valid_until = %s;"
 
 #define MFME_SQL_QUERY_META                                             \
-    "SELECT id, name, value, valid_since, valid_to"                     \
+    "SELECT id, name, value, valid_since, valid_to "                    \
     "FROM mfme_meta "                                                   \
     "WHERE name = \"%s\" "                                              \
     "  AND valid_since <= %s "                                          \
     "  AND (valid_to IS NULL OR valid_to > %s);"
 
 
-int mfme_sql_fmt(sqlite3* db, int (* cb)(void* userdata, int ncol, char** coltext, char** colres), void* userdata, char** errmsg, const char* fmt, ...) PRINTF_FMT_CHECK(5, 6);
+int mfme_sql_fmt(sqlite3* db, int (* cb)(void* userdata, int argc, char** argv, char** azcol_name), void* userdata, char** errmsg, const char* fmt, ...) PRINTF_FMT_CHECK(5, 6);
 

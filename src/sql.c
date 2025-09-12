@@ -6,7 +6,7 @@
 #include "logging.h"
 
 
-int mfme_sql_fmt(sqlite3* db, int (* cb)(void* userdata, int ncol, char** coltext, char** colres), void* userdata, char** errmsg, const char* fmt, ...)
+int mfme_sql_fmt(sqlite3* db, int (* cb)(void* userdata, int argc, char** argv, char** azcol_name), void* userdata, char** errmsg, const char* fmt, ...)
 {
     va_list args;
     va_start(args, fmt);

@@ -9,11 +9,13 @@
 static int _mfme_logging_print_time(FILE* stream);
 
 
-int mfme_logging_level = MFME_LOGGING_LEVEL_WARNING;
+int mfme_logging_level = MFME_LOGGING_LEVEL_DEBUG;
 
 
 int mfme_logging_out(FILE* stream, mfme_logging_level_t level, const char* fmt, ...)
 {
+    printf("mfme_logging_level = %d\n", mfme_logging_level);
+    printf("level = %d\n", level);
     if (mfme_logging_level < level) {
         return 0;
     }
