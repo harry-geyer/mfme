@@ -3,6 +3,7 @@
 #include <mongoose.h>
 
 #include "database.h"
+#include "logging.h"
 
 
 #define WEBROOT_DIR             "webroot"
@@ -36,7 +37,7 @@ static void _mongoose_init(struct mg_mgr* mgr)
     mg_mgr_init(mgr);
     mg_log_set(MG_LL_DEBUG);
     const char* address = "127.0.0.1:8123";
-    printf("Listening to %s\n", address);
+    mfme_logging_info("Listening to %s", address);
     mg_http_listen(mgr, address, _handle_connection, NULL);
 }
 

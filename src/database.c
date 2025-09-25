@@ -106,6 +106,39 @@ static int _mfme_database_version_cb(void* userdata, int argc, char** argv, char
         sqlite3_free(error_msg);
         return ret;
     }
+
+    ret = mfme_sql_fmt(ctx->db, NULL, 0, &error_msg, MFME_SQL_CREATE_TABLE_FILESTORE_TYPES);
+    if (ret) {
+        mfme_logging_critical("Error creating filestore types table: %s\n", error_msg);
+        sqlite3_free(error_msg);
+        return ret;
+    }
+    ret = mfme_sql_fmt(ctx->db, NULL, 0, &error_msg, MFME_SQL_CREATE_TABLE_FILESTORES);
+    if (ret) {
+        mfme_logging_critical("Error creating filestores table: %s\n", error_msg);
+        sqlite3_free(error_msg);
+        return ret;
+    }
+    ret = mfme_sql_fmt(ctx->db, NULL, 0, &error_msg, MFME_SQL_CREATE_TABLE_FILES);
+    if (ret) {
+        mfme_logging_critical("Error creating files table: %s\n", error_msg);
+        sqlite3_free(error_msg);
+        return ret;
+    }
+
+    /* Add default filestore type and filestore */
+    ret = mfme_sql_fmt(ctx->db, NULL, 0, &error_msg, MFME_SQL_INSERT_FILESTORE_TYPE, "directory");
+    if (ret) {
+        mfme_logging_critical("Error inserting filestore type \"directory\": %s\n", error_msg);
+        sqlite3_free(error_msg);
+        return ret;
+    }
+    ret = mfme_sql_fmt(ctx->db, NULL, 0, &error_msg, MFME_SQL_INSERT_FILESTORE, "directory", "default", "./db_files");
+    if (ret) {
+        mfme_logging_critical("Error inserting default filestore: %s\n", error_msg);
+        sqlite3_free(error_msg);
+        return ret;
+    }
     return 0;
 }
 
